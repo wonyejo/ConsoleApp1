@@ -1,26 +1,19 @@
 ﻿using System;
-using System.Threading;
-public class Panda
-{
-	public string Name; //인스턴스 필드(인스턴스 변수)
-	public static int Population; //정적 필드(공유 변수)
 
-	public Panda(string n)
-	{
-		Name = n;
-		Population += 1;
-	}
+public class UnitConverter
+{
+    int ratio; //필드, data member
+    public UnitConverter(int unitRatio) { ratio = unitRatio; } //생성자, function member
+    public double Convert(int unit) { return unit * ratio; } //메서드, function member
 }
+
 class Program
 {
-	static void Main()
-	{
-		Panda p1 = new Panda("Pan Dee");
-		Panda p2 = new Panda("Pan Dah");
-
-		
-		Console.WriteLine("p1의 이름: " + p1.Name + ", p2의 이름: " + p2.Name);
-		Console.WriteLine(Panda.Population); //2
-		Thread.Sleep(1000);
-	}
+    static void Main()
+    {
+        Console.WriteLine("Input any Meter 값");
+        UnitConverter MtoMMConverter = new UnitConverter(1000);
+        int height = int.Parse(Console.ReadLine());
+        Console.WriteLine(MtoMMConverter.Convert(height) + " millimeter");
+    }
 }

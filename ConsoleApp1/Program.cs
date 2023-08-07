@@ -1,19 +1,22 @@
 ﻿using System;
+using System.Threading;
 
-public class UnitConverter
+class Sentence
 {
-    int ratio; //필드, data member
-    public UnitConverter(int unitRatio) { ratio = unitRatio; } //생성자, function member
-    public double Convert(int unit) { return unit * ratio; } //메서드, function member
-}
+    string[] words = "The quick brown fox".Split();
 
-class Program
-{
-    static void Main()
+    public string this[int wordNum] // 인덱서
     {
-        Console.WriteLine("Input any Meter 값");
-        UnitConverter MtoMMConverter = new UnitConverter(1000);
-        int height = int.Parse(Console.ReadLine());
-        Console.WriteLine(MtoMMConverter.Convert(height) + " millimeter");
+        get { return words[wordNum]; }
+        set { words[wordNum] = value; }
+    }
+    static void Main()
+
+    {
+        Sentence s = new Sentence();
+        Console.WriteLine(s[3]); // fox
+        s[3] = "kangaroo";
+        Console.WriteLine(s[3]); // kangaroo
+        Thread.Sleep(3000);
     }
 }

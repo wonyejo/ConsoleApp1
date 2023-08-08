@@ -1,22 +1,24 @@
 ﻿using System;
 using System.Threading;
 
-class Sentence
+class Foo
 {
-    string[] words = "The quick brown fox".Split();
+    public static int X = Y; // Y 필드가 초기화되기 전에 X 필드가 초기화됨
+    public static int Y = 3; // Y 필드 초기화 (3)
 
-    public string this[int wordNum] // 인덱서
-    {
-        get { return words[wordNum]; }
-        set { words[wordNum] = value; }
-    }
+static Foo() // 정적 생성자
+{
+    Console.WriteLine("Static Constructor Called");
+}
+}
+
+class Program
+{
     static void Main()
-
     {
-        Sentence s = new Sentence();
-        Console.WriteLine(s[3]); // fox
-        s[3] = "kangaroo";
-        Console.WriteLine(s[3]); // kangaroo
+        Console.WriteLine(Foo.X); // 출력 결과: 0 (X 필드 초기화)
         Thread.Sleep(3000);
     }
 }
+
+
